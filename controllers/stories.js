@@ -10,3 +10,15 @@ export const getStories = async (req, res) => {
     });
   }
 };
+
+export const createStory = async (req, res) => {
+  const newStory = new Story(req.body);
+  try {
+    await newStory.save();
+    res.status(201).end();
+  } catch (error) {
+    res.status(409).json({
+      message: err.message,
+    });
+  }
+};
